@@ -15,7 +15,7 @@ If a move causes three consecutive tiles of the same value to slide together, on
 The game is won when a tile with a value of 2048 appears on the board. Players can continue beyond that to reach higher scores.When the player has no legal moves (there are no empty spaces and no adjacent tiles with the same value), the game ends.
 
 
-### Features 
+### Features and elements
 1.Randomness. The game randomly generates 2 or 4 at a random empty grid.
 
 2.Usage of data strucures for storing status. For example, we use int variables to keep trace of the score of the players. Besides, 2D array will be used for storing the number at each position of the chessboard after each click. Since each input decides the direction of the movement of numbers and might cause the change of values at every position, we need to update and restore the new status repetitively.
