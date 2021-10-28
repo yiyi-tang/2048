@@ -17,3 +17,4 @@ The game is won when a tile with a value of 2048 appears on the board. Players c
 
 ### Features 
 1.randomness. The game randomly generates 2 or 4 at a random empty grid.
+2.
