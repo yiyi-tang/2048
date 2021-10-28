@@ -17,4 +17,5 @@ The game is won when a tile with a value of 2048 appears on the board. Players c
 
 ### Features 
 1.randomness. The game randomly generates 2 or 4 at a random empty grid.
-2.Usage of data strucures for storing status. For example, we use int variables to keep trace of the score of the players. Besides, 2D array will be used for storing the number at each position of the chessboard after each click. 
+
+2.Usage of data strucures for storing status. For example, we use int variables to keep trace of the score of the players. Besides, 2D array will be used for storing the number at each position of the chessboard after each click. Since each input decides the direction of the movement of numbers and might cause the change of values at every position, we need to update and restore the new status repetitively.
