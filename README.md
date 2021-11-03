@@ -16,9 +16,10 @@ The game is won when a tile with a value of 2048 appears on the board. However, 
 ### Features 
 1. **Random tiles.** The game randomly generates 2 or 4 at a random empty grid every turn. (Related requirement: #1)
 2. **Printed status.** After each move of the player, the program will output the new status of the 4\*4 tiles for reference. This is achieved by a 2D array storing the number at every tiles. (Related requirement: #2)
-3. **The score board.** A scoreboard on the upper-right keeps track of the user's score. The user's score starts at zero, and is increased whenever two tiles combine, by the value of the new tile. In our game, an int variables is used to keep trace of the score of the players. (Related requirement: #2)
+3. **The score board.** A scoreboard on the upper-right keeps track of the user's score. The user's score starts at zero, and is increased whenever two tiles combine, by the value of the new tile. In our game, an int variables is used to keep trace of the score of the players. (Related requirement: #2) 
 4. **Saving & Loading.** During the game, the players can pause and save the current status of  2048 tiles at any time. This will automatically create a save point, from which the players can choose to resume the next time they start the game. (Related requirement: #4)
-5. (Dynamic memory management?)
+5. **Unlimited Saving point.** With the assist of dynamic memory management, the player may save as many game status as he/she wishes. (Related requirement: #3)
+
 
 All of the features mentioned above will be achieved by separate functions stored in independent source files. (Related requirement: #5)
 
