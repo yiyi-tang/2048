@@ -64,8 +64,6 @@ int merge(int tiles[4][4], char direction){
         }
       }
       break;
-    default:
-        cout << "Invalid input." << endl;
   }
   return score;
 }
@@ -140,16 +138,18 @@ void move(int tiles[4][4], char direction){
         }
       }
       break;
-    default:
-        cout << "Invalid input." << endl;
   }
   return;
 }
 
-void slide(int tiles[4][4], int &score){
+bool slide(int tiles[4][4], int &score){
   char input;
   cin >> input;
+  if (input != 'w' || input != 'W' || input != 'a' || input != 'A' || input != 's' || input != 'S' || input != 'd' || input != 'D'){
+    return false;
+  }
   move(tiles, input);
   score += merge(tiles, input);
   move(tiles, input);
+  return true;
 }
