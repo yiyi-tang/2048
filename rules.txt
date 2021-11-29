@@ -1,0 +1,15 @@
+2048 is played on a plain 4×4 grid.
+Initially there will be 2 tiles of either 2 or 4.
+And every turn a new tile will appear randomly in the grid.
+Enter 'W'(↑),'S'(↓),'A'(←) or 'D'(→) to move the tiles.
+Tiles with the same number merge into one when they touch.
+Add them up to reach 2048!
+
+Friendly reminders:
+You can pause at any time during the game:
+Just enter everything except the direction key!
+You may also encounter questions ended with (Y/*):
+Just enter 'Y' for yes, and everything else for no.
+Also remember that all the keys are case-insensitive.
+
+Enjoy!
