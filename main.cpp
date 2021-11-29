@@ -11,7 +11,6 @@ Main functions to implemented:
 //main.cpp
 #include <iostream>
 //#include ".h"
-//#include ".o"
 using namespace std;
 
 int main(){
