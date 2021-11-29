@@ -7,15 +7,73 @@ using namespace std;
 
 //Merge two or more tiles if possible and return the incresed score.
 
-int merge(int tiles[4][4]){
-  return 0;
+int merge(int tiles[4][4], char direction){
+  int score = 0;
+  switch (direction){
+    case 'w':
+    case 'W':
+    // Merging upward
+      for (int i = 0; i < 4; i++) {
+        for (int j = 0; j < 3; j++) {
+          if (tiles[j][i] == tiles[j+1][i]) {
+            tiles[j][i] = tiles[j][i]*2;
+            score += tiles[j][i]*2;
+            tiles[j+1][i] = 0;
+          }
+        }
+      }
+      break;
+
+    case 'a':
+    case 'A':
+    // Merging leftward
+    for (int j = 0; j < 4; j++) {
+      for (int i = 0; i < 3; i++) {
+        if (tiles[j][i] == tiles[j][i+1]) {
+          tiles[j][i] = tiles[j][i]*2;
+          score += tiles[j][i]*2;
+          tiles[j][i+1] = 0;
+        }
+      }
+    }
+      break;
+
+    case 's':
+    case 'S':
+    // Merging downward
+      for (int i = 0; i < 4; i++) {
+        for (int j = 3; j > 0; j--) {
+          if (tiles[j][i] == tiles[j-1][i]) {
+            tiles[j][i] = tiles[j][i]*2;
+            score += tiles[j][i]*2;
+            tiles[j-1][i] = 0;
+          }
+        }
+      }
+      break;
+
+    case 'd':
+    case 'D':
+    // Merging rightward
+      for (int j = 0; j < 4; j++) {
+        for (int i = 3; i > 0; i--) {
+          if (tiles[j][i] == tiles[j][i-1]) {
+            tiles[j][i] = tiles[j][i]*2;
+            score += tiles[j][i]*2;
+            tiles[j][i-1] = 0;
+          }
+        }
+      }
+      break;
+    default:
+        cout << "Invalid input." << endl;
+  }
+  return score;
 }
 
 //Read user input and slide the tiles.
-void slide(int tiles[4][4], int &score){
-  char input;
-  cin >> input;
-  switch (input){
+void move(int tiles[4][4], char direction){
+  switch (direction){
     case 'w':
     case 'W':
     // Moving upward
@@ -36,16 +94,16 @@ void slide(int tiles[4][4], int &score){
     case 'a':
     case 'A':
     // Moving leftward
-      for (int i = 0; i < 4; i++) {
+      for (int j = 0; j < 4; j++) {
         int count = 0;
-        for (int j = 0; j < 4; j++) {
-          if (tiles[i][j] != 0) {
-            tiles[i][count] = tiles[i][j];
+        for (int i = 0; i < 4; i++) {
+          if (tiles[j][i] != 0) {
+            tiles[j][count] = tiles[j][i];
             count++;
           }
         }
-        for (int j = count; j < 4; j++) {
-          tiles[i][j] = 0;
+        for (int i = count; i < 4; i++) {
+          tiles[j][i] = 0;
         }
       }
       break;
@@ -70,16 +128,16 @@ void slide(int tiles[4][4], int &score){
     case 'd':
     case 'D':
     // Moving rightward
-      for (int i = 0; i < 4; i++) {
+      for (int j = 0; j < 4; j++) {
         int count = 3;
-        for (int j = 3; j >= 0; j--) {
-          if (tiles[i][j] != 0) {
-            tiles[i][count] = tiles[i][j];
+        for (int i = 3; i >= 0; i--) {
+          if (tiles[j][i] != 0) {
+            tiles[j][count] = tiles[j][i];
             count--;
           }
         }
-        for (int j = count; j >= 0; j--) {
-          tiles[i][j] = 0;
+        for (int i = count; i >= 0; i--) {
+          tiles[j][i] = 0;
         }
       }
       break;
@@ -89,6 +147,14 @@ void slide(int tiles[4][4], int &score){
   return;
 }
 
+
+void slide(int tiles[4][4], int &score){
+  char input;
+  cin >> input;
+  move(tiles, input);
+  score += merge(tiles, input);
+  move(tiles, input);
+}
 
 int main(){
   int tiles[4][4] = {
@@ -106,6 +172,7 @@ int main(){
       }
       cout << endl;
     }
+    cout << "Score: " << score << endl;
     slide(tiles, score);
   }
 }
