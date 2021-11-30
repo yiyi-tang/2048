@@ -1,20 +1,17 @@
-void product_number(int consecutive_elimination)
+#include <stdlib.h>
+#include <time.h>
+
+void random(int chessboard[4][4])
 {
   //for random position
-	int x, y;
-	srand((unsigned)time(NULL));
-        
-	while (chessboard[x][y] != 0)
-	{
-	
-		x = rand() % Size;
-		y = rand() % Size;
-	};
-	
-	//for random 4 or 2此处有小问题，关于连消，是否生成3
-	if (consecutive_elimination == 0 || consecutive_elimination == 1)
-		chessboard[x][y] = 2;
-	else
-		chessboard[x][y] = 4;
+	srand(time(NULL));
+	int x = rand() % 4;
+	int y = rand() % 4;
 
+	while (chessboard[x][y] != 0){
+		x = rand() % 4;
+		y = rand() % 4;
+	}
+
+	chessboard[x][y] = 2 * (rand() % 2 + 1);
 }
