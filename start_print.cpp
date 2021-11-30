@@ -1,5 +1,5 @@
 #include <iostream>
-#include <
+using namespace std;
 
 //first initialize our chessboard
 int num[row][column];
@@ -7,36 +7,23 @@ for (int i=0; i<4; ++i){
   for (int j=0; j<4; ++j) num[i][j]=0;}
   
   
+product_number();
+product_number();
+
 //print updated chessboard
-void print_chessboard(){
-	for (int i = 0; i < 4; ++i)
+void print_chessboard()
+{
+	cout << "=====================" << endl;
+	for (int i = 0; i < 4; i++)
 	{
-		cout << "---------------------------------"<< endl;
-		for (int j = 0; j < 4; ++j)
+		for (int j = 0; j < 4; j++)
 		{
-			if (game[i][j] == 0)
-			{
-				cout <<"|   \t";
-			}
-			else 
-			{
-				cout <<"|   " << game[i][j] << "\t";
-			}
+			cout << "|" << setw(4) << chessboard[i][j];
 		}
 		cout << "|" << endl;
 	}
-	cout << "---------------------------------"<< endl;
 
-  }
-  
-  
-  
-  
-  
+	cout << "=====================" << endl;
 }
 
 
-int main(){
-  
-  return 0;
-}
