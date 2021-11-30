@@ -3,8 +3,8 @@ Data Structure for storing infomation in the 16 tiles: a 4*4 int array.
 Main functions to implemented:
 1. void printTiles(int tiles[4][4], int score); //Print the interface of the game.
 2. void random(int tiles[4][4]); //Generate one random tile of 2 or 4 in the blank space.
-3. bool slide(int tiles[4][4], int &score); //Read user's input of direction, slide the tiles, and update the score. Supported by:
-  (i)   void move(int tiles[4][4], char direction); //Move the tiles according to the direction.
+3. bool move(int tiles[4][4], int &score); //Read user's input of direction, slide the tiles, and update the score. Supported by:
+  (i)   void slide(int tiles[4][4], char direction); //Move the tiles according to the direction.
   (ii)  int merge(int tiles[4][4], char direction); //Merge two or more tiles according to the direction, if possible.
 4. bool fail(int tiles[4][4]); //Check if the game should end (when there's no legal moves)
 5. void loadGame(int tiles[4][4], int &score) and void saveGame(int tiles[4][4], int &score);
@@ -13,7 +13,7 @@ Main functions to implemented:
 
 //main.cpp
 #include <iostream>
-#include <fstream> //!!!!!!!!!
+#include <fstream>
 #include <string>
 #include <stdlib.h>
 #include <time.h>
@@ -22,8 +22,11 @@ Main functions to implemented:
 //#include ".h"
 using namespace std;
 
-
-//slide.cpp
+struct Act{
+  int tile[4][4];
+  int score;
+  Act * next;
+};
 
 //Merge two or more tiles if possible and return the incresed score.
 int merge(int tiles[4][4], char direction){
@@ -87,8 +90,9 @@ int merge(int tiles[4][4], char direction){
   }
   return score;
 }
+
 //Read user input and slide the tiles.
-void move(int tiles[4][4], char direction){
+void slide(int tiles[4][4], char direction){
   switch (direction){
     case 'w':
     case 'W':
@@ -161,20 +165,8 @@ void move(int tiles[4][4], char direction){
   return;
 }
 
-bool slide(int tiles[4][4], int &score){
-  char input;
-  cin >> input;
-  if (input != 'w' && input != 'W' && input != 'a' && input != 'A' && input != 's' && input != 'S' && input != 'd' && input != 'D'){
-    return false;
-  }
-  move(tiles, input);
-  score += merge(tiles, input);
-  move(tiles, input);
-  return true;
-}
 
-bool fail(int chessboard[4][4])
-{
+bool fail(int chessboard[4][4]){
 	//if the chessboard is not full
 	for (int i = 0; i < 4; i++){
 		for (int j = 0; j < 4; j++){
@@ -222,8 +214,7 @@ void printTiles(int chessboard[4][4], int score){
 }
 
 
-void random(int chessboard[4][4])
-{
+void random(int chessboard[4][4]){
   //for random position
 	srand(time(NULL));
 	int x = rand() % 4;
@@ -235,6 +226,30 @@ void random(int chessboard[4][4])
 	}
 
 	chessboard[x][y] = 2 * (rand() % 2 + 1);
+}
+
+
+void store(Act * head, int tiles[4][4], int score){
+  Act * temp = new Act;
+  for (int i = 0; i < 4; i++) {
+    for (int j = 0; j < 4; j++) {
+      temp->tile[i][j] = tiles[i][j];
+    }
+  }
+  temp->next = head;
+  temp->score = score;
+  head = temp;
+}
+
+
+bool equal(int tileA[4][4], int tileB[4][4]){
+  for (int i = 0; i < 4; i++) {
+    for (int j = 0; j < 4; j++) {
+      if (tileA[i][j] != tileA[i][j])
+        return false;
+    }
+  }
+  return true;
 }
 
 int main(){
@@ -271,13 +286,39 @@ int main(){
     cout << intro;
   }
   while (!exit){
+    Act * head = NULL;
     random(tiles);
     random(tiles);
     printTiles(tiles, score);
+    store(head, tiles, score);
+    for (int i = 0; i < 4; i++) {
+      for (int j = 0; j < 4; j++) {
+        cout << head->tile[i][j] << ' ';
+      }
+      cout << endl;
+    }
     while(!fail(tiles)){
-      if (slide(tiles, score)){
-        printTiles(tiles, score);
+      char input;
+      cin >> input;
+      if (input == 'U' || input == 'u') {
+        for (int i = 0; i < 4; i++) {
+          for (int j = 0; j < 4; j++) {
+            tiles[i][j] = head->next->tile[i][j];
+          }
+        }
+        score = head->next->score;
+        head = head->next;
+      }
+      else if (input == 'w' || input == 'W' || input == 'a' || input == 'A' || input == 's' || input == 'S' || input == 'd' || input == 'D'){
+        slide(tiles, input);
+        score += merge(tiles, input);
+        slide(tiles, input);
+        if (head != NULL && equal(tiles, head->tile)) {
+          cout << "Invalid direction to move. Please input again." << endl;
+          continue;
+        }
         random(tiles);
+        store(head, tiles, score);
         printTiles(tiles, score);
         continue;
       }
