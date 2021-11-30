@@ -3,14 +3,18 @@ void product_number()
   //for random position
 	int x, y;
 	srand((unsigned)time(NULL));
-	do
+        
+	while (chessboard[x][y] != 0)
 	{
+	
 		x = rand() % Size;
 		y = rand() % Size;
-	} while (chessboard[x][y] != 0);
+	};
 	
-	//for random 4 or 2
-	if (elimination_level == 0 || elimination_level == 1)
+	//for random 4 or 2此处有小问题，关于连消，是否生成3
+	if (consecutive_elimination == 0 || consecutive_elimination == 1)
 		chessboard[x][y] = 2;
 	else
 		chessboard[x][y] = 4;
+
+}
