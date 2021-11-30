@@ -1,4 +1,4 @@
-void product_number()
+void product_number(int consecutive_elimination)
 {
   //for random position
 	int x, y;
