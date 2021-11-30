@@ -1,25 +1,30 @@
-#include<stdio.h>
-#include <string>
+#include <iostream>
+#include <fstream>
+#include <iomanip>
+using namespace std;
 
 void save(int chessboard[4][4])
 {
-    FILE *mem;
  
-  //open a file to restore the information
-    if((mem = fopen("memory.txt","w+")) == NULL){
-        fprintf(stderr,"Can't open memory.txt!\n");
-        exit(1);
-    }
+    //open a txt file and save our two-dimentional array
+    ofstream outfile;
+	outfile.open("memory.txt", ios::in);
 
-    //save our two-dimentional array
-    for (int i=0; i<4; ++i) {
-      for (int j=0; j<4; ++j) {
-        fwrite(int,sizeof(int),1,mem);
-  
-   fclose(mem);
-  
-   return(0);
+	for (int i = 0; i < 4; i++)
+   {
+      for (int j=0; j<4; j++) {
+		outfile << chessboard[i][j] << "  ";}
+        
+	}
 
+	outfile.close();//关闭文件，保存文件。
+    return 0;
 }
 
-      
+        
+
+
+
+
+
+
