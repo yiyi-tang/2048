@@ -13,17 +13,16 @@ Main functions to implemented:
 
 //main.cpp
 #include <iostream>
-#include <ifstream>
-#include <ofstream>
+#include <fstream>
 #include <string>
 //#include ".h"
 using namespace std;
 
 int main(){
   int exit = 0;
-  int tiles[4][4];
+  int tiles[4][4] = {0};
   int score = 0;
-  string intro = "Please select an option to continue:\n1: How to play?\n2: Start a new game.\n3: Load saved game.\n4: exit.\n"
+  string intro = "Please select an option to continue:\n1: How to play?\n2: Start a new game.\n3: Load saved game.\n4: exit.\n";
   cout << "Welcome to 2048!" << endl;
   cout << intro;
   char choice;
@@ -32,7 +31,7 @@ int main(){
       ifstream fin;
       string line;
       fin.open("rules.txt");
-      if ( fin.fail() ){
+      if (fin.fail()){
         cout << "Error in file opening!" << endl;
       }
       while ( getline(fin, line) ){
@@ -57,10 +56,10 @@ int main(){
     random(tiles);
     printTiles(tiles, score);
     while(!fail(tiles)){
-      if (slide(tiles, &score)){
-        printTiles(tiles, &score);
+      if (slide(tiles, score)){
+        printTiles(tiles, score);
         random(tiles);
-        printTiles(tiles, &score);
+        printTiles(tiles, score);
         continue;
       }
       else{
