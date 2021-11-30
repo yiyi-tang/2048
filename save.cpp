@@ -17,7 +17,7 @@ void save(int chessboard[4][4])
         
     }
 
-	outfile.close();//关闭文件，保存文件。
+    outfile.close();
     return 0;
 }
 
