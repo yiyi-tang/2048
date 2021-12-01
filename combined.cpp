@@ -1,5 +1,5 @@
 /*
-Data Structure for storing infomation in the 16 tiles: a 4*4 int array.
+Data Structure for storing infomation in the 16 tiles: a 4*4 int array. It is also referred as the chessboard in this file sometimes.
 Main functions to implemented:
 1. void printTiles(int tiles[4][4], int score); //Print the interface of the game.
 2. void random(int tiles[4][4]); //Generate one random tile of 2 or 4 in the blank space.
@@ -14,6 +14,7 @@ Main functions to implemented:
   (i)   void loadGame(int tiles[4][4], int &score);
   (ii)  void saveGame(int tiles[4][4], int score);//For loading and saving game status.
 7. void deleteList(Node * & head)；
+
 */
 
 //main.cpp
@@ -30,25 +31,30 @@ struct Node{
   int info;
   Node * next;
 };
+
+//Help to terminate the current iteration as a if-condition
 bool fileError = false;
-//Print updated chessboard of a new turn.
+
+//Print updated chessboard and score of a new move.
+//Inputs: the chessboard and the score.
 void printTiles(int chessboard[4][4], int score){
 	cout << "---------------------" << endl;
 	for (int i = 0; i < 4; i++){
 		for (int j = 0; j < 4; j++){
-			if (chessboard[i][j] == 0)
-				cout << "|" << setw(4) << ' ';//Print a blank space
+			if (chessboard[i][j] == 0) //Print a blank space if the value is 0
+				cout << "|" << setw(4) << ' ';
 			else
 				cout << "|" << setw(4) << chessboard[i][j];
 		}
 		cout << "|" << endl;
-    cout << "---------------------" << endl;
+    cout << "---------------------" << endl; //
 	}
 
 	cout << "Current Score: " << score << endl;
 }
 
 //Generate one random tile of 2 or 4 in the blank space.
+//Input: the chessboard (which will be altered through pass-by-reference)
 void random(int chessboard[4][4]){
   //for random position
 	srand(time(NULL));
@@ -59,7 +65,6 @@ void random(int chessboard[4][4]){
 		x = rand() % 4;
 		y = rand() % 4;
 	}
-
 	chessboard[x][y] = 2 * (rand() % 2 + 1);
 }
 
