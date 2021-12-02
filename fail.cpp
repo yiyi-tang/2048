@@ -1,5 +1,13 @@
-bool fail(int chessboard[4][4])
-{
+#include "fail.h"
+#include <iostream>
+#include <stdlib.h>
+#include <iomanip>
+#include <string>
+using namespace std;
+
+
+//Check if the game should end (when there's no legal moves).
+bool fail(int chessboard[4][4]){
 	//if the chessboard is not full
 	for (int i = 0; i < 4; i++){
 		for (int j = 0; j < 4; j++){
@@ -7,7 +15,7 @@ bool fail(int chessboard[4][4])
 				return false;
 		}
 	}
-	
+
 	//if there is still something we can combine
 	//lines
 	for (int i = 0; i < 4; i++){
@@ -16,8 +24,7 @@ bool fail(int chessboard[4][4])
 				return false;
 		}
 	}
-	
-	
+
 	//columns
 	for (int i = 0; i < 4; i++){
 		for (int j = 0; j < 3; j++){
@@ -25,6 +32,6 @@ bool fail(int chessboard[4][4])
 				return false;
 		}
 	}
-	
+  cout << "GAME OVER!" << endl;
 	return true;
 }
