@@ -59,6 +59,18 @@ void loadGame(int chessboard[4][4], int &score){
 	return;
 }
 
+bool win(int tiles[4][4]){
+	for (int i = 0; i < 4; i++) {
+		for (int j = 0; j < 4; j++) {
+			if (tiles[i][j] >= 2048) {
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
+
 //Save the game status to a file.
 void saveGame(int chessboard[4][4], int score){
 	//open a txt file and save our two-dimentional array
@@ -93,6 +105,7 @@ int main(){
   bool exit = 0;
   int tiles[4][4] = {0};
   int score = 0;
+	int firstWin = 0;
   string intro = "Please select an option to continue:\n1: How to play?\n2: Start a new game.\n3: Load saved game.\n4: exit.\n"; //!!!!!
   cout << "Welcome to 2048!" << endl;
   cout << intro;
@@ -140,6 +153,9 @@ int main(){
       cin >> input;
       if (input == 'U' || input == 'u') {
         undo(head, scores, tiles, score);
+				if ((!win(tiles)) && firstWin == 1) {
+					firstWin = 0;
+				}
       }
       else if (input == 'w' || input == 'W' || input == 'a' || input == 'A' || input == 's' || input == 'S' || input == 'd' || input == 'D'){
         slide(tiles, input);
@@ -152,6 +168,16 @@ int main(){
         random(tiles);
         store(head, scores, tiles, score);
         printTiles(tiles, score);
+				if (win(tiles) && firstWin == 0) {
+					firstWin = 1;
+					cout << "You win! Continue to play? (Y/*)" << endl;
+					char continuing;
+					cin >> continuing;
+					if (continuing != 'Y' && continuing != 'y') {
+						break;
+					}
+				}
+				printTiles(tiles);
         continue;
       }
       else{
@@ -186,15 +212,23 @@ int main(){
       break;
     cout << "Start a new game? (Y/*)" << endl;
     char newplay;
-    cin >> replay;
+    cin >> newplay;
     if (newplay == 'Y' || newplay == 'y'){
-      int tiles[4][4] = {0};
-      int score = 0;
+			for (int i = 0; i < 4; i++){
+				for (int j = 0; j < 4; j++){
+					tiles[i][j] = 0;
+				}
+			}
+      score = 0;
+			firstWin = 0;
       random(tiles);
       random(tiles);
     }
     else{
       loadGame(tiles, score);
+			if (win(tiles)) {
+				firstWin = 1;
+			}
     }
   }
   cout << "Bye!" << endl;
