@@ -177,7 +177,7 @@ int main(){
 						break;
 					}
 				}
-				printTiles(tiles);
+				printTiles(tiles, score);
         continue;
       }
       else{
