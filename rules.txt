@@ -6,10 +6,14 @@ Tiles with the same number merge into one when they touch.
 Add them up to reach 2048!
 
 Friendly reminders:
-You can pause at any time during the game:
-Just enter everything except the direction key!
-You may also encounter questions ended with (Y/*):
-Just enter 'Y' for yes, and everything else for no.
-Also remember that all the keys are case-insensitive.
+1.  You can undo your previous move unlimitedly by entering 'U'!
+2.  You can pause at any time during the game:
+    Just enter everything except the direction key and the 'U'!
+3.  You can also save your progress of the game.
+    But remember: once you save your game, undo is no longer possible.
+    Plus, a limit of 1 record can be saved: new saving will overwrite the old one.
+4.  When you encounter questions ended with (Y/*):
+    Just enter 'Y' for yes, and everything else for no.
+5.  All the keys are case-insensitive.
 
-Enjoy!
+Ready? Let's Start!
