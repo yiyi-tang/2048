@@ -129,6 +129,9 @@ int main(){
     }
     else if (choice == '3'){
       loadGame(tiles, score);
+			if (win(tiles)) {
+				firstWin = 1;
+			}
       if (fileError) {
         continue;
       }
@@ -176,8 +179,9 @@ int main(){
 					if (continuing != 'Y' && continuing != 'y') {
 						break;
 					}
+					else
+						printTiles(tiles, score);
 				}
-				printTiles(tiles, score);
         continue;
       }
       else{
