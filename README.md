@@ -7,19 +7,34 @@ Zhou Yantong 3035770965
 
 ## 2048 
 ### Rules
-[Part of the following information is cited from the Wikipedia Page: https://en.wikipedia.org/wiki/Hangman_(game)]  
-2048 is played on a plain 4×4 grid, with numbered tiles that slide when a player moves them using the four arrow keys. Every turn, a new tile randomly appears in an empty spot on the board with a value of either 2 or 4. If two tiles of the same number collide while moving, they will merge into a tile with the total value of the two tiles that collided. 
+[Reference: https://en.wikipedia.org/wiki/2048_(video_game)]  
+
+2048 is played on a plain 4×4 grid, with numbered tiles that slide when a player moves them using the four arrow keys (in our game, 'W' serves as a up arrow, 'A' for left, 'S' for down and 'D' for right). Every turn, a new tile randomly appears in an empty spot on the board with a value of either 2 or 4. 
+
+At each turn, the play can perform a legal move if at least one tile will slide (not blocked by either another tile or the edge of the grid) or merge (collide with anoth tilt of the same number, fusing into a tile with the total value of the two tiles that collided) in the direction inputted. 
 
 The game is won when a tile with a value of 2048 appears on the board. However, when the player has no legal moves (there are no empty spaces and no adjacent tiles with the same value), the game ends.
 
 
 ### Features 
-1. **Random tiles.** The game randomly generates 2 or 4 at a random empty grid every turn. (Related requirement: #1)
-2. **Printed status.** After each move of the player, the program will output the new status of the 4\*4 tiles for reference. This is achieved by a 2D array storing the number at every tiles. (Related requirement: #2)
-3. **The score board.** A scoreboard on the upper-right keeps track of the user's score. The user's score starts at zero, and is increased whenever two tiles combine, by the value of the new tile. In our game, an int variables is used to keep trace of the score of the players. (Related requirement: #2) 
-4. **Saving & Loading.** During the game, the players can pause and save the current status of  2048 tiles at any time. This will automatically create a save point, from which the players can choose to resume the next time they start the game. (Related requirement: #4)
-5. **Unlimited Saving point.** With the assist of dynamic memory management, the player may save as many game status as he/she wishes. (Related requirement: #3)
+#### Random Tiles
+The game randomly generates a tile of value 2 or 4 at a random empty grid every turn.
 
+The position of tile as well as the number are both generated with the help of rand() and a random seed, which fulfills Requirement#1.
 
-All of the features mentioned above will be achieved by separate functions stored in independent source files. (Related requirement: #5)
+#### Printed status and Score
+After each move of the player, the program will output the new status of the 4\*4 tiles for reference. Plus, a scoreboard at the bottom will also be printed to keep track of the user's score.
 
+This feature is achieved by a 2D array storing the number at every tiles, together with an integer storing the latest score. (Related requirement: #2)
+
+#### Undo
+Our game offers a powerful, special feature: UNDO. The player has the option to undo at any time during the game, restoring the tiles to their previous state. In addition, please be aware that the undo function is unlimited: you can even go back to the very first status when you started the game, so long as the game is not over or been exited.
+
+This feature is supported by an 4x4 array of linked lists for storing the status of the tiles on every turn, as well as a single linked list storing the score. We chose to store this information dynamically since we won't be able to figure out the size of the memory allocated to this function at the beginning. This  also fulfills Requirement#2 and #3.
+
+#### Save & Load
+During the game, the players can pause and save the current status of 2048 tiles at any time. This will automatically create a new file in the directory, from which the players can choose to resume at next time by loading it.
+
+As for this feature, a .txt file will be created as output or read as input for saving & loading. This fulfills Requirement#4.
+
+**All of the features mentioned above will be achieved by separate functions and struct stored in independent source files, and will be compiled for use by Makefile. (Related requirement: #5)**
