@@ -5,7 +5,6 @@
 #include <string>
 using namespace std;
 
-
 //Check if the game should end (when there's no legal moves).
 //Taking the two-dimentional array as input, if the chessboard is not full, return false
 
