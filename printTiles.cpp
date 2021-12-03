@@ -3,7 +3,10 @@
 #include <iomanip>
 using namespace std;
 
+//Take the 4*4 array and the score as the inputs.
+//No output. 
 //Print updated chessboard of a new turn.
+
 void printTiles(int chessboard[4][4], int score){
 	cout << "---------------------------------" << endl;
 	for (int i = 0; i < 4; i++){
