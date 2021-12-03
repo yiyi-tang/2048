@@ -7,8 +7,11 @@ using namespace std;
 
 
 //Check if the game should end (when there's no legal moves).
+//Taking the two-dimentional array as input, if the chessboard is not full, return false
+
+
 bool fail(int chessboard[4][4]){
-	//if the chessboard is not full
+	
 	for (int i = 0; i < 4; i++){
 		for (int j = 0; j < 4; j++){
 			if (chessboard[i][j] == 0)
@@ -16,8 +19,8 @@ bool fail(int chessboard[4][4]){
 		}
 	}
 
-	//if there is still something we can combine
-	//lines
+	//Taking the two-dimentional array as input, if there is still something we can combine in the direction of line,  return false
+ 
 	for (int i = 0; i < 4; i++){
 		for (int j = 0; j < 3; j++){
 			if (chessboard[i][j] == chessboard[i][j+1])
@@ -25,7 +28,7 @@ bool fail(int chessboard[4][4]){
 		}
 	}
 
-	//columns
+	//Taking the two-dimentional array as input, if there is still something we can combine in the direction of column,  return false
 	for (int i = 0; i < 4; i++){
 		for (int j = 0; j < 3; j++){
 			if (chessboard[j][i] == chessboard[j+1][i])
