@@ -7,7 +7,10 @@
 #include <string>
 using namespace std;
 
+//Take the 4*4 array, score and the nodes as the input.
+//No output.
 //Restore the situation of the tiles to a previous move.
+
 void undo(Node * head[4][4], Node * & scores, int tiles[4][4], int &score){
   if (scores->next != NULL) {
     for (int i = 0; i < 4; i++) {
