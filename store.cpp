@@ -7,7 +7,7 @@
 #include <string>
 using namespace std;
 
-////Take the 4*4 array, score and the nodes as the input.
+//Take the 4*4 array, score and the nodes as the input.
 //No output.
 //Store the situation of the tiles of every move for undo purpose.
 void store(Node * head[4][4], Node * & scores, int tiles[4][4], int score){
