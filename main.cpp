@@ -244,6 +244,7 @@ int main(){
     }
     else{
       loadGame(tiles, score);
+			firstWin = 0;
 			if (win(tiles)) {
 				firstWin = 1;
 			}
