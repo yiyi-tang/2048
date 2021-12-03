@@ -215,6 +215,7 @@ int main(){
     if (replay != 'Y' && replay != 'y')
       break;
     cout << "Start a new game? (Y/*)" << endl;
+
     char newplay;
     cin >> newplay;
     if (newplay == 'Y' || newplay == 'y'){
